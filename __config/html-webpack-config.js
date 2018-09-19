@@ -24,6 +24,7 @@ module.exports = (environment = 'production') => {
           sourceStr
         };
       }
+
       return {
         compilation: compilation,
         webpack: compilation.getStats().toJson(),

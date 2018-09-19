@@ -1,5 +1,11 @@
 @import url('./normalize.css');
 
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
 @media screen and (orientation: landscape) {
   /* This fixes a iOS webkit redraw with slotted elements*/
   @keyframes iosWebkitLandscape {from { zoom: 99.99999%; } to { zoom: 100%; }}

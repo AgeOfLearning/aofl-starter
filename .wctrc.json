@@ -1,13 +1,26 @@
 {
-  "verbose": false,
+  "verbose": true,
   "clientOptions": {
     "environmentImports": []
   },
   "plugins": {
     "local": {
-      "browsers": ["chrome"],
+      "browsers": [
+        "firefox",
+        "chrome",
+        "safari",
+        "canary"
+      ],
       "browserOptions": {
-        "chrome": ["headless"]
+        "chrome": [
+          "headless"
+        ],
+        "canary": [
+          "headless"
+        ],
+        "firefox": [
+          "-headless"
+        ]
       }
     }
   }

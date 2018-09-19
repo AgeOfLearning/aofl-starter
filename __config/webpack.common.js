@@ -5,7 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const glob = require('fast-glob');
 const AofLTemplatingPlugin = require('@aofl/templating-plugin');
 const htmlWebpackConfig = require('./html-webpack-config');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (mode) => {
   let htmlFiles = glob.sync(['**/view.ejs'], {
@@ -55,7 +56,7 @@ module.exports = (mode) => {
                 minimize: true,
                 attrs: [
                   'aofl-img:aofl-src',
-                  'aofl-source:aofl-srcset',
+                  'aofl-source:srcset',
                   'aofl-img:src',
                   'source:srcset',
                   ':src'
@@ -63,10 +64,6 @@ module.exports = (mode) => {
               }
             }
           ]
-        },
-        {
-          test: /language\.js$/,
-          use: '@aofl/i18n-loader'
         },
         {
           test: /\.css$/,
@@ -82,12 +79,23 @@ module.exports = (mode) => {
               options: {
                 sourceMap: false
               }
+            },
+            {
+              loader: '@aofl/webcomponent-css-loader',
+              options: {
+                sourceMap: false,
+                path: path.resolve(__dirname, '..', 'templates', 'main', 'css', 'index.css')
+              }
             }
           ]
         },
         {
           test: /@webcomponents/,
           loader: 'imports-loader?this=>window'
+        },
+        {
+          test: /i18n\/index\.js$/,
+          use: '@aofl/i18n-loader'
         },
         {
           enforce: 'pre',
@@ -103,52 +111,7 @@ module.exports = (mode) => {
         {
           test: /\.js$/,
           exclude: /node_modules\/(?!@aofl|@polymer|lit-html).*/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              'cacheDirectory': true,
-              'presets': [
-                '@babel/preset-env'
-              ],
-              'plugins': [
-                '@babel/plugin-proposal-object-rest-spread',
-                '@babel/plugin-syntax-dynamic-import',
-                '@babel/plugin-proposal-optional-chaining',
-                [
-                  '@babel/plugin-transform-runtime',
-                  {
-                    'corejs': false,
-                    'helpers': false,
-                    'regenerator': true,
-                    'useESModules': false
-                  }
-                ]
-              ],
-              'env': {
-                'test': {
-                  'plugins': [
-                    [
-                      'istanbul',
-                      {
-                        'include': [
-                          '**/*.js'
-                        ],
-                        'exclude': [
-                          '**/node_modules/*',
-                          '**/*.spec.*',
-                          '**/tests-dest/*',
-                          '**/node_modules_sourced/*',
-                          '**/__config/*',
-                          'js/webcomponents-loader',
-                          '**/*-{instance,enumerate}/*'
-                        ]
-                      }
-                    ]
-                  ]
-                }
-              }
-            }
-          }
+          loader: 'babel-loader'
         },
         {
           test: /\.(png|jpe?g|gif)$/,
@@ -177,6 +140,16 @@ module.exports = (mode) => {
         {
           test: /\.svg$/,
           loader: 'svg-inline-loader'
+        },
+        {
+          test: /\.(woff|woff2|ttf|eot)$/,
+          use: {
+            loader: 'file-loader',
+            options: {
+              name: '[hash].[ext]',
+              limit: 1
+            }
+          }
         }
       ]
     },
@@ -186,25 +159,13 @@ module.exports = (mode) => {
         root: path.resolve(__dirname, '..')
       }),
       new HtmlWebpackPlugin({
-        template: path.resolve(
-          __dirname,
-          '..',
-          'templates',
-          'main',
-          'template.ejs'
-        ),
+        template: path.resolve(__dirname, '..', 'templates', 'main', 'template.ejs'),
         filename: 'templates/main/template.html',
         ...htmlWebpackConfig(mode)
       }),
       ...viewHtmlPlugins,
       new AofLTemplatingPlugin({
-        template: path.resolve(
-          __dirname,
-          '..',
-          'templates',
-          'main',
-          'template.ejs'
-        ),
+        template: path.resolve(__dirname, '..', 'templates', 'main', 'template.ejs'),
         templateFilename: 'templates/main/template.html',
         filename: 'index.html',
         mainRoutes: 'routes',
@@ -215,14 +176,52 @@ module.exports = (mode) => {
           ignore: ['**/__build/**/*', '**/node_modules/**/*']
         }
       }),
-      new HardSourceWebpackPlugin()
+      new WebpackPwaManifest({
+        'name': 'Aofl Starter App',
+        'short_name': 'AoflStarter',
+        'description': 'Aofl Starter App',
+        'display': 'standalone',
+        'theme-color': '#fdf667',
+        'background_color': '#fdf667',
+        'crossorigin': 'use-credentials', // can be null, use-credentials or anonymous
+        'ios': {
+          'apple-mobile-web-app-title': 'Aofl Starter App',
+          'apple-mobile-web-app-status-bar-style': '#fdf667'
+        },
+        'icons': [
+          {
+            src: 'assets/manifest/icon-48x48.png',
+            sizes: '48x48'
+          },
+          {
+            src: 'assets/manifest/icon-72x72.png',
+            sizes: '72x72'
+          },
+          {
+            src: 'assets/manifest/icon-96x96.png',
+            sizes: '96x96'
+          },
+          {
+            src: 'assets/manifest/icon-144x144.png',
+            sizes: '144x144'
+          },
+          {
+            src: 'assets/manifest/icon-192x192.png',
+            sizes: '192x192'
+          },
+          {
+            src: 'assets/manifest/icon-512x512.png',
+            sizes: '512x512'
+        }
+        ]
+      }),
+      new CopyWebpackPlugin([
+        path.resolve('favicon.ico')
+      ])
     ],
     watchOptions: {
       ignored: [/node_modules\//]
     },
-    externals: [
-      'globalStyles'
-    ],
     stats: 'minimal',
     optimization: {
       runtimeChunk: 'single',

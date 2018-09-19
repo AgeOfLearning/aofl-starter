@@ -1,7 +1,7 @@
 import {routerInstance} from '@aofl/router';
 
 const routes = window?.aofljsConfig?.routesConfig?.routes || [];
-const otherwise = '/login/';
+const otherwise = '/'; // @todo: change to 404 route
 const otherwiseExists = routes.some((item) => item.path === otherwise);
 
 routerInstance.afterEach((request, response, next) => {

@@ -7,7 +7,8 @@ window.aofljsConfig.routesConfig = {
       'path': '/',
       'dynamic': false,
       'title': 'AofL::Home',
-      'locale': ''
+      'locale': '',
+      'template': 'main'
     }
   ]
 };

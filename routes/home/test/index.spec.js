@@ -1,10 +1,9 @@
+/* eslint no-invalid-this: "off" */
 import '../index.js';
 import {html} from '@polymer/lit-element';
 import {render} from 'lit-html';
 
 describe('home-page', () => {
-  let element;
-
   before(function() {
     render(html`
     <test-fixture id="HomeTestFixture">
@@ -15,14 +14,11 @@ describe('home-page', () => {
     `, document.getElementById('test-container'));
   });
 
-  beforeEach(() => {
-    element = fixture('HomeTestFixture');
-    incrementBtn = element.shadowRoot.getElementById('increment');
-    decrementBtn = element.shadowRoot.getElementById('decrement');
-    count = element.shadowRoot.getElementById('count');
+  beforeEach(function() {
+    this.element = fixture('HomeTestFixture');
   });
 
-  it('shoud have shadowRoot', () => {
-    expect(element.shadowRoot).to.not.equal(null);
+  it('shoud have shadowRoot', function() {
+    expect(this.element.shadowRoot).to.not.be.null;
   });
 });

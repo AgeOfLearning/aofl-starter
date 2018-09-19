@@ -9,14 +9,12 @@ import styles from './styles.css';
 
 /**
  *
- * @class HomePage
  * @extends {AoflElement}
  */
-const HomePage = class HomePage extends AoflElement {
+class HomePage extends AoflElement {
   /**
    *
    * Creates an instance of HomePage.
-   * @memberof HomePage
    */
   constructor() {
     super();
@@ -25,8 +23,6 @@ const HomePage = class HomePage extends AoflElement {
   /**
    *
    * @readonly
-   * @static
-   * @memberof HomePage
    */
   static get is() {
     return 'home-page';
@@ -35,10 +31,9 @@ const HomePage = class HomePage extends AoflElement {
   /**
    *
    * @return {Object}
-   * @memberof HomePage
    */
-  _render() {
-    return super._render(template, [window.globalStyles, styles]);
+  render() {
+    return super.render(template, [styles]);
   }
 };
 

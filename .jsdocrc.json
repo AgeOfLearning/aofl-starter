@@ -2,14 +2,17 @@
   "source": {
     "include": "js",
     "includePattern": ".js$",
-    "excludePattern": "(node_modules/|docs)"
+    "excludePattern": "(node_modules/|api-docs)"
   },
   "opts": {
     "template": "node_modules/docdash",
     "encoding": "utf8",
-    "destination": "docs/",
+    "destination": "api-docs/",
     "recurse": true,
     "verbose": true
+  },
+  "tags": {
+    "allowUnknownTags": true
   },
   "templates": {
     "cleverLinks": false,

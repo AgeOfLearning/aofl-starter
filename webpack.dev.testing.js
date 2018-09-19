@@ -6,14 +6,17 @@ const config = merge(devConfig, {
   plugins: [
     new UnitTesting({
       exclude: [
-        'node_modules/**/*',
-        'node_modules_sourced/**/*',
-        'js/__config/**/*',
-        'server/**/*'
+        '**/__build*',
+        '**/node_modules',
+        '**/node_modules_sourced',
+        '**/documentation{,!(/tests/**)}',
+        '**/__config',
+        '**/*-instance/**',
+        '**/*-polyfill/**'
       ],
       scripts: [
         'runtime',
-        'polyfill-service',
+        'init-polyfill-service',
         'custom-elements-es5-adapter'
       ]
     })
