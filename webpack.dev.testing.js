@@ -1,9 +1,14 @@
 const merge = require('webpack-merge');
-const devConfig = require('./webpack.dev');
+const common = require('./__config/webpack.common');
 const UnitTesting = require('@aofl/unit-testing-plugin');
+const webpack = require('webpack');
 
-const config = merge(devConfig, {
+const config = merge(common('development'), {
+  devtool: 'none',
   plugins: [
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1
+    }),
     new UnitTesting({
       exclude: [
         '**/__build*',

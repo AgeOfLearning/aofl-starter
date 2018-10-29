@@ -26,12 +26,6 @@ module.exports = (mode) => {
   });
 
   const config = {
-    resolve: {
-      modules: [
-        path.resolve('./'),
-        './node_modules/'
-      ]
-    },
     entry: {
       'custom-elements-es5-adapter':
         './node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js',
@@ -111,7 +105,13 @@ module.exports = (mode) => {
         {
           test: /\.js$/,
           exclude: /node_modules\/(?!@aofl|@polymer|lit-html).*/,
-          loader: 'babel-loader'
+          use: {
+            loader: 'babel-loader',
+            options: {
+              'cacheDirectory': true,
+              ...require('./.babelrc.json')
+            }
+          }
         },
         {
           test: /\.(png|jpe?g|gif)$/,
@@ -136,10 +136,6 @@ module.exports = (mode) => {
               }
             }
           ]
-        },
-        {
-          test: /\.svg$/,
-          loader: 'svg-inline-loader'
         },
         {
           test: /\.(woff|woff2|ttf|eot)$/,
@@ -219,6 +215,12 @@ module.exports = (mode) => {
         path.resolve('favicon.ico')
       ])
     ],
+    resolve: {
+      modules: [
+        path.resolve('./'),
+        './node_modules/'
+      ]
+    },
     watchOptions: {
       ignored: [/node_modules\//]
     },
@@ -245,12 +247,6 @@ module.exports = (mode) => {
           }
         }
       }
-    },
-    resolve: {
-      modules: [
-        path.resolve('.'),
-        path.resolve('node_modules')
-      ]
     }
   };
 

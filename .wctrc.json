@@ -1,8 +1,5 @@
 {
   "verbose": true,
-  "clientOptions": {
-    "environmentImports": []
-  },
   "plugins": {
     "local": {
       "browsers": [
