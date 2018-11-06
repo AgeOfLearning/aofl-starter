@@ -3,6 +3,10 @@ import '../index.js';
 import {html, render} from 'lit-html';
 
 describe('home-page', () => {
+  before(function() {
+    this.testContainer = getTestContainer();
+  });
+
   beforeEach(function() {
     render(html`
     <test-fixture id="HomeTestFixture">
@@ -10,7 +14,7 @@ describe('home-page', () => {
         <home-page></home-page>
       </template>
     </test-fixture>
-    `, document.getElementById('test-container'));
+    `, this.testContainer);
 
     this.element = fixture('HomeTestFixture');
   });

@@ -4,12 +4,30 @@ const UnitTesting = require('@aofl/unit-testing-plugin');
 const webpack = require('webpack');
 
 const config = merge(common('development'), {
+  output: {
+    filename: '[name]-[chunkhash].min.js'
+  },
   devtool: 'none',
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'istanbul-instrumenter-loader',
+          options: {
+            esModules: true
+          }
+        },
+        exclude: /(node_modules|\.spec\.|__build|__config)/
+      }
+    ]
+  },
   plugins: [
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1
     }),
     new UnitTesting({
+      config: '.wctrc.json',
       exclude: [
         '**/__build*',
         '**/node_modules',
@@ -17,7 +35,8 @@ const config = merge(common('development'), {
         '**/documentation{,!(/tests/**)}',
         '**/__config',
         '**/*-instance/**',
-        '**/*-polyfill/**'
+        '**/*-polyfill/**',
+        '**/init-router-service'
       ],
       scripts: [
         'runtime',

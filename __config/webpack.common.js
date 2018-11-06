@@ -1,30 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const glob = require('fast-glob');
-const AofLTemplatingPlugin = require('@aofl/templating-plugin');
+const AofLTemplatingPlugin = require('@aofl/templating-plugin/index');
 const htmlWebpackConfig = require('./html-webpack-config');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (mode) => {
-  let htmlFiles = glob.sync(['**/view.ejs'], {
-    ignore: ['**/__build/**/*', '**/node_modules/**/*'],
-    cwd: path.resolve(__dirname, '..')
-  });
-
-  let viewHtmlPlugins = htmlFiles.map((filePath) => {
-    let absFilePath = path.resolve(filePath);
-    let filename = path.join(path.dirname(filePath), 'view-[hash].html');
-
-    return new HtmlWebpackPlugin({
-      ...htmlWebpackConfig(mode),
-      template: absFilePath,
-      filename
-    });
-  });
-
   const config = {
     entry: {
       'custom-elements-es5-adapter':
@@ -73,7 +55,12 @@ module.exports = (mode) => {
               options: {
                 sourceMap: false
               }
-            },
+            }
+          ]
+        },
+        {
+          test: /\.css$/,
+          use: [
             {
               loader: '@aofl/webcomponent-css-loader',
               options: {
@@ -154,21 +141,18 @@ module.exports = (mode) => {
       new CleanWebpackPlugin('__build', {
         root: path.resolve(__dirname, '..')
       }),
-      new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, '..', 'templates', 'main', 'template.ejs'),
-        filename: 'templates/main/template.html',
-        ...htmlWebpackConfig(mode)
-      }),
-      ...viewHtmlPlugins,
       new AofLTemplatingPlugin({
-        template: path.resolve(__dirname, '..', 'templates', 'main', 'template.ejs'),
-        templateFilename: 'templates/main/template.html',
-        filename: 'index.html',
-        mainRoutes: 'routes',
-        locale: 'en-US',
-        inlineConfig: true,
+        template: {
+          name: 'main',
+          template: path.resolve(__dirname, '..', 'templates', 'main', 'template.ejs'),
+          filename: path.join('templates', 'main', 'template.html'),
+          ...htmlWebpackConfig(mode)
+        },
         routes: {
-          pattern: path.join(__dirname, '..', 'routes*', '*', 'index.js'),
+          mainRoutes: path.join(__dirname, '..', 'routes'),
+          pattern: [
+            path.join(__dirname, '..', 'routes*', '**', '*', 'index.js')
+          ],
           ignore: ['**/__build/**/*', '**/node_modules/**/*']
         }
       }),

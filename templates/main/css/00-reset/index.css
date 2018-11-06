@@ -3,7 +3,7 @@
 *,
 *::after,
 *::before {
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 @media screen and (orientation: landscape) {

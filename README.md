@@ -1,11 +1,10 @@
 # AOFL JS
 
 ## Introduction
-AOFL JS is a light, web component based, isometric framework. It provides the bare necessities of a PWA (Progressive Web Application). It's composed of a simple core library which includes Polymer's [LitElement](https://github.com/Polymer/lit-element) for web component composition, an isometric build process and a flat directory structure. Its ecosystem includes a [store](https://www.npmjs.com/package/@aofl/store) for state management, a client side [router](https://www.npmjs.com/package/@aofl/router) and [i18n](https://www.npmjs.com/package/@aofl/i18n-mixin) support and several other libraries and supporting components.
+AOFL JS is a light, web component based framework. It provides the bare necessities of a PWA (Progressive Web Application). It's composed of a simple core library which includes Polymer's [LitElement](https://github.com/Polymer/lit-element) for web component composition, a preconfigured build process and a flat directory structure. Its ecosystem includes a [store](https://www.npmjs.com/package/@aofl/store) for state management, a client side [router](https://www.npmjs.com/package/@aofl/router) and [i18n](https://www.npmjs.com/package/@aofl/i18n-mixin) support and several other libraries and supporting components.
 
 
 ### The build process
-The framework is isometric _without any server side rendering_.<br />
 This is achieved through the build process which, takes the client side routes, templates and configuration information to pre build the associated route directories, styles, scripts, images and an index.html for each. The resulting build directory tree is what is published to the server. The apps from there should lazy load any other required resources.
 
 ### Flat directory structure
@@ -19,9 +18,9 @@ AOFL JS supports all browsers that are [ES5-compliant](http://kangax.github.io/c
 
 `npm i -g @aofl/cli`
 
-`mkdir my-pwa-app && cd my-pwa-app`
+`aofl init path/to/my-pwa-app`
 
-`aofl init`
+`cd path/to/my-pwa-app`
 
 `npm run start:dev`
 
@@ -31,12 +30,12 @@ Go to `http://localhost:8080` to find a sample home page.
 ## Ecosystem
 | Project | Status | Description |
 |---------|--------|-------------|
-| [@aofl/cli]            | v1.0.0-beta.27  | Aofl app scaffolding |
-| [@aofl/store]          | v1.0.0-beta.27 | Large-scale state management |
-| [@aofl/router]         | v1.0.0-beta.27 | Client side routing |
-| [@aofl/web-components] | v1.0.0-beta.27 | Utility web components |
-| [@aofl/i18n-mixin]     | v1.0.0-beta.27 | Component translation |
-| [@aofl/rotations]      | v1.0.0-beta.27 | A/B Testing support |
+| [@aofl/cli]            | v1.2.0 | Aofl app scaffolding |
+| [@aofl/store]          | v1.2.0 | Large-scale state management |
+| [@aofl/router]         | v1.2.0 | Client side routing |
+| [@aofl/web-components] | v1.2.0 | Utility web components |
+| [@aofl/i18n-mixin]     | v1.2.0 | Component translation |
+| [@aofl/rotations]      | v1.2.0 | A/B Testing support |
 
 [@aofl/cli]: https://www.npmjs.com/package/@aofl/aofljs-cli
 [@aofl/store]: https://www.npmjs.com/package/@aofl/store

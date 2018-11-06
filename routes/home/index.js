@@ -5,7 +5,7 @@
  */
 import {template} from './template';
 import AoflElement from '@aofl/web-components/aofl-element';
-import styles from './styles.css';
+import styles from './template.css';
 
 /**
  *

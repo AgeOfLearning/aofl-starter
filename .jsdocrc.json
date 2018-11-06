@@ -5,7 +5,7 @@
     "excludePattern": "(node_modules/|api-docs)"
   },
   "opts": {
-    "template": "node_modules/docdash",
+    "template": "node_modules/@aofl/jsdoc-template",
     "encoding": "utf8",
     "destination": "api-docs/",
     "recurse": true,

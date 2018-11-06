@@ -16,7 +16,7 @@ module.exports = (environment = 'production') => {
       for (let key in assets.chunks) {
         if (!assets.chunks.hasOwnProperty(key)) continue;
         let url = assets.chunks[key].entry;
-        let source = compilation.assets[url.substr(assets.publicPath.length)].source();
+        let source = compilation.assets[url.substr(assets.publicPath.length).replace(/\?.*/, '')].source();
         let sourceStr = jsStringEscape(source);
         assetsMap[key] = {
           url,

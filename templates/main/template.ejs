@@ -8,6 +8,7 @@
     aoflTemplate:metaTags
     <title>aoflTemplate:title</title>
     <style>${require("./css/index.css")}</style>
+    <script>window.aofljsConfig = window.aofljsConfig || {};</script>
   </head>
   <body>
     <route-view></route-view>
@@ -18,9 +19,7 @@
         eval('<%= assetsMap["custom-elements-es5-adapter"].sourceStr %>');
       }
 
-
       <%= assetsMap['common'] && assetsMap['common'].source %>
-      <%= assetsMap['routes.config.js'].source %>
 
       (function() {
         document.addEventListener('WebComponentsReady', function componentsReady() {
