@@ -1,16 +1,16 @@
 const merge = require('webpack-merge');
 const common = require('./__config/webpack.common');
-const path = require('path');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
-
-const config = merge(common('development'), {
+const commonConfig = common('development');
+const config = merge(commonConfig, {
   devtool: 'source-map',
   plugins: [
     new HardSourceWebpackPlugin()
   ],
   devServer: {
-    contentBase: path.join(__dirname, '__build'),
+    contentBase: commonConfig.output.path,
+    openPage: commonConfig.output.publicPath === '/' ? '': commonConfig.output.publicPath,
     port: 8080,
     open: true,
     stats: 'minimal',

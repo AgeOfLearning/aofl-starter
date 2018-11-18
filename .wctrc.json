@@ -3,22 +3,10 @@
   "persistent": false,
   "plugins": {
     "local": {
-      "browsers": [
-        "firefox",
-        "chrome",
-        "safari",
-        "canary"
-      ],
+      "browsers": ["firefox", "chrome", "safari"],
       "browserOptions": {
-        "chrome": [
-          "headless"
-        ],
-        "canary": [
-          "headless"
-        ],
-        "firefox": [
-          "-headless"
-        ]
+        "chrome": ["headless"],
+        "firefox": ["-headless"]
       }
     },
     "istanbul": {
@@ -34,8 +22,7 @@
         "**/*-instance/**",
         "**/*-loader/**",
         "**/*-polyfill/**",
-        "**/*-plugin/**",
-        "**/router/examples"
+        "**/*-plugin/**"
       ]
     }
   }

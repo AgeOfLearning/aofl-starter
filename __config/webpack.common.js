@@ -7,16 +7,19 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (mode) => {
+  const outputDirName = '__build';
+  const outputDirRoot = path.join(__dirname, '..');
+  const publicPath = '/';
+
   const config = {
     entry: {
       'custom-elements-es5-adapter':
         './node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js',
-      'aofljs': './js/main.js',
-      'init-polyfill-service': './js/init-polyfill-service/index.js'
+      'main': './modules/index.js'
     },
     output: {
-      path: path.join(__dirname, '..', '__build'),
-      publicPath: '/',
+      path: path.join(outputDirRoot, outputDirName),
+      publicPath,
       filename: '[chunkhash].min.js'
     },
     mode,
@@ -138,8 +141,8 @@ module.exports = (mode) => {
     },
     plugins: [
       new webpack.HashedModuleIdsPlugin(),
-      new CleanWebpackPlugin('__build', {
-        root: path.resolve(__dirname, '..')
+      new CleanWebpackPlugin(outputDirName, {
+        root: outputDirRoot
       }),
       new AofLTemplatingPlugin({
         template: {
@@ -151,7 +154,8 @@ module.exports = (mode) => {
         routes: {
           mainRoutes: path.join(__dirname, '..', 'routes'),
           pattern: [
-            path.join(__dirname, '..', 'routes*', '**', '*', 'index.js')
+            path.join(__dirname, '..', 'routes*', '*', 'index.js'),
+            path.join(__dirname, '..', 'routes*', '**', 'index.js')
           ],
           ignore: ['**/__build/**/*', '**/node_modules/**/*']
         }
@@ -195,9 +199,10 @@ module.exports = (mode) => {
         }
         ]
       }),
-      new CopyWebpackPlugin([
-        path.resolve('favicon.ico')
-      ])
+      new CopyWebpackPlugin([{
+        from: 'assets/favicon.ico',
+        to: 'favicon.ico'
+      }])
     ],
     resolve: {
       modules: [
@@ -221,7 +226,7 @@ module.exports = (mode) => {
               if (chunk.name === null) {
                 return true;
               }
-              return (['custom-elements-es5-adapter', 'webcomponents-loader', 'init-polyfill-service'].indexOf(chunk.name) === -1 && (chunk.name.indexOf('AoflUnitTestingPlugin') === -1));
+              return (['custom-elements-es5-adapter', 'main'].indexOf(chunk.name) === -1 && (chunk.name.indexOf('AoflUnitTestingPlugin') === -1));
             },
             minChunks: 2,
             minSize: 0,

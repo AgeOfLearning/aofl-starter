@@ -8,7 +8,6 @@
     aoflTemplate:metaTags
     <title>aoflTemplate:title</title>
     <style>${require("./css/index.css")}</style>
-    <script>window.aofljsConfig = window.aofljsConfig || {};</script>
   </head>
   <body>
     <route-view></route-view>
@@ -18,17 +17,8 @@
       if (window.customElements) {
         eval('<%= assetsMap["custom-elements-es5-adapter"].sourceStr %>');
       }
-
       <%= assetsMap['common'] && assetsMap['common'].source %>
-
-      (function() {
-        document.addEventListener('WebComponentsReady', function componentsReady() {
-          document.removeEventListener('WebComponentsReady', componentsReady, false);
-          <%= assetsMap['aofljs'].source %>
-        }, false);
-      })();
-
-      <%= assetsMap['init-polyfill-service'].source %>
+      <%= assetsMap['main'].source %>
     </script>
   </body>
 </html>

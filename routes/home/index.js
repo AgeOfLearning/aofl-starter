@@ -1,7 +1,7 @@
 /**
  * @route /
  * @title AofL::Home
- * @prerender true
+ * @prerender false
  */
 import {template} from './template';
 import AoflElement from '@aofl/web-components/aofl-element';

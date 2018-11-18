@@ -35,12 +35,11 @@ const config = merge(common('development'), {
         '**/documentation{,!(/tests/**)}',
         '**/__config',
         '**/*-instance/**',
-        '**/*-polyfill/**',
-        '**/init-router-service'
+        '**/*-polyfill/**'
       ],
       scripts: [
         'runtime',
-        'init-polyfill-service',
+        'main',
         'custom-elements-es5-adapter'
       ]
     })
