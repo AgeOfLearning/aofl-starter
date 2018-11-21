@@ -154,8 +154,7 @@ module.exports = (mode) => {
         routes: {
           mainRoutes: path.join(__dirname, '..', 'routes'),
           pattern: [
-            path.join(__dirname, '..', 'routes*', '*', 'index.js'),
-            path.join(__dirname, '..', 'routes*', '**', 'index.js')
+            path.join('routes', '**', 'index.js')
           ],
           ignore: ['**/__build/**/*', '**/node_modules/**/*']
         }

@@ -14,7 +14,8 @@
     "start": "npm run env:prod -- webpack-dev-server --config webpack.prod.js --progress",
     "stats": "webpack --profile --config webpack.prod.js --json > stats.json",
     "docs": "jsdoc -c .jsdocrc.json",
-    "i18n": "aofl i18n -p \"**/*.js\" -E \"**/*.spec.js\" -E \"**/node_modules_sourced\""
+    "i18n": "aofl i18n -p \"**/*.js\" -E \"**/*.spec.js\" -E \"**/node_modules_sourced\"",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -23,11 +24,11 @@
   "author": "Arian Khosravi <arian.khosravi@aofl.com>",
   "license": "MIT",
   "devDependencies": {
-    "@aofl/i18n-loader": "^1.2.1",
+    "@aofl/i18n-loader": "^1.2.3",
     "@aofl/jsdoc-template": "^3.4.0",
-    "@aofl/templating-plugin": "^1.2.0",
-    "@aofl/unit-testing-plugin": "^1.2.0",
-    "@aofl/webcomponent-css-loader": "^1.2.0",
+    "@aofl/templating-plugin": "^1.2.3",
+    "@aofl/unit-testing-plugin": "^1.2.3",
+    "@aofl/webcomponent-css-loader": "^1.2.3",
     "@babel/core": "^7.1.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-proposal-optional-chaining": "^7.0.0",
@@ -68,9 +69,9 @@
     "workbox-webpack-plugin": "^3.6.3"
   },
   "dependencies": {
-    "@aofl/polyfill-service": "^1.2.1",
-    "@aofl/router": "^1.2.1",
-    "@aofl/server-environment": "^1.2.1",
+    "@aofl/polyfill-service": "^1.2.3",
+    "@aofl/router": "^1.2.3",
+    "@aofl/server-environment": "^1.2.3",
     "@aofl/store": "^1.2.1",
     "@aofl/web-components": "^1.2.1",
     "@babel/polyfill": "^7.0.0",
