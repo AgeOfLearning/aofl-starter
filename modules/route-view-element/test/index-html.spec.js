@@ -24,10 +24,10 @@ describe('route-view', function() {
       }
     };
 
-    sinon.stub(this.routerInstance, 'after', (fn) => {
+    sinon.stub(this.routerInstance, 'after').callsFake((fn) => {
       this.mws.push(sinon.spy(fn));
     });
-    sinon.stub(this.routerInstance, 'navigate', () => {
+    sinon.stub(this.routerInstance, 'navigate').callsFake(() => {
       this.mws.forEach((mw) => mw(response, response, ()=>{}));
     });
 

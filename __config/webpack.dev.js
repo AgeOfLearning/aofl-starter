@@ -1,5 +1,5 @@
 const merge = require('webpack-merge');
-const common = require('./__config/webpack.common');
+const common = require('./webpack.common');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 const commonConfig = common('development');

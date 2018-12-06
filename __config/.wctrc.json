@@ -10,7 +10,7 @@
       }
     },
     "istanbul": {
-      "dir": "./coverage",
+      "dir": "../coverage",
       "reporters": ["text-summary", "lcov"],
       "include": "**/*.js",
       "exclude": [

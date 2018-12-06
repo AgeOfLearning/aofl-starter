@@ -1,11 +1,14 @@
 const merge = require('webpack-merge');
-const common = require('./__config/webpack.common');
+const common = require('./webpack.common');
 const UnitTesting = require('@aofl/unit-testing-plugin');
 const webpack = require('webpack');
+const path = require('path');
 
 const config = merge(common('development'), {
   output: {
-    filename: '[name]-[chunkhash].min.js'
+    path: path.join(__dirname, '..', '__build'),
+    filename: '[name]-[chunkhash].min.js',
+    publicPath: '/__build/'
   },
   devtool: 'none',
   module: {
@@ -18,7 +21,7 @@ const config = merge(common('development'), {
             esModules: true
           }
         },
-        exclude: /(node_modules|\.spec\.|__build|__config)/
+        exclude: /(node_modules_sourced|node_modules|\.spec\.|__build|__config)/
       }
     ]
   },
@@ -27,7 +30,7 @@ const config = merge(common('development'), {
       maxChunks: 1
     }),
     new UnitTesting({
-      config: '.wctrc.json',
+      config: path.join(__dirname, '.wctrc.json'),
       exclude: [
         '**/__build*',
         '**/node_modules',
@@ -39,8 +42,8 @@ const config = merge(common('development'), {
       ],
       scripts: [
         'runtime',
-        'main',
-        'custom-elements-es5-adapter'
+        'common',
+        'main'
       ]
     })
   ]

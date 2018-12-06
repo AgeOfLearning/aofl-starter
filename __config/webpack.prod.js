@@ -1,14 +1,16 @@
 /*eslint-disable*/
 const merge = require('webpack-merge');
-const common = require('./__config/webpack.common');
+const common = require('./webpack.common');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 const {InjectManifest} = require('workbox-webpack-plugin');
+const commonConfig = common('production');
 
-const config = merge(common('production'), {
+const config = merge(commonConfig, {
   devtool: 'nosources-source-map',
   devServer: {
-    contentBase: path.join(__dirname, '__build'),
+    contentBase: commonConfig.output.path,
+    openPage: commonConfig.output.publicPath === '/' ? '': commonConfig.output.publicPath,
     port: 8080,
     open: true,
     stats: 'minimal',
@@ -28,7 +30,7 @@ const config = merge(common('production'), {
       }
     }),
     new InjectManifest({
-      swSrc: './sw.js',
+      swSrc: path.join(__dirname, '..', 'sw.js'),
       swDest: 'sw.js',
       exclude: [/\.LICENSE$/, /\.map\.js$/]
     })

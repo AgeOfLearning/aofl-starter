@@ -1,19 +1,19 @@
 {
   "name": "aofl-starter",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "env:prod": "cross-env NODE_ENV=production",
     "env:dev": "cross-env NODE_ENV=development",
     "env:test": "cross-env NODE_ENV=test",
-    "test": "npm run env:test -- webpack --config webpack.dev.testing.js --progress",
-    "prod": "npm run env:prod -- webpack --config webpack.prod.js --progress",
-    "dev": "npm run env:dev -- webpack --config webpack.dev.js --progress",
-    "start:dev": "npm run env:dev -- webpack-dev-server --config webpack.dev.js --progress",
-    "start": "npm run env:prod -- webpack-dev-server --config webpack.prod.js --progress",
-    "stats": "webpack --profile --config webpack.prod.js --json > stats.json",
-    "docs": "jsdoc -c .jsdocrc.json",
+    "test": "npm run env:test -- webpack --config __config/webpack.dev.testing.js --progress",
+    "prod": "npm run env:prod -- webpack --config __config/webpack.prod.js --progress",
+    "dev": "npm run env:dev -- webpack --config __config/webpack.dev.js --progress",
+    "start:dev": "npm run env:dev -- webpack-dev-server --config __config/webpack.dev.js --progress",
+    "start": "npm run env:prod -- webpack-dev-server --config __config/webpack.prod.js --progress",
+    "stats": "webpack --profile --config __config/webpack.prod.js --json > stats.json",
+    "docs": "jsdoc -c __config/.jsdocrc.json",
     "i18n": "aofl i18n -p \"**/*.js\" -E \"**/*.spec.js\" -E \"**/node_modules_sourced\"",
     "lint": "eslint ."
   },
@@ -24,11 +24,11 @@
   "author": "Arian Khosravi <arian.khosravi@aofl.com>",
   "license": "MIT",
   "devDependencies": {
-    "@aofl/i18n-loader": "^1.2.3",
+    "@aofl/i18n-loader": "^1.3.0",
     "@aofl/jsdoc-template": "^3.4.0",
-    "@aofl/templating-plugin": "^1.2.3",
-    "@aofl/unit-testing-plugin": "^1.2.3",
-    "@aofl/webcomponent-css-loader": "^1.2.3",
+    "@aofl/templating-plugin": "^1.3.0",
+    "@aofl/unit-testing-plugin": "^1.3.0",
+    "@aofl/webcomponent-css-loader": "^1.3.0",
     "@babel/core": "^7.1.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-proposal-optional-chaining": "^7.0.0",
@@ -69,15 +69,15 @@
     "workbox-webpack-plugin": "^3.6.3"
   },
   "dependencies": {
-    "@aofl/polyfill-service": "^1.2.3",
-    "@aofl/router": "^1.2.3",
-    "@aofl/server-environment": "^1.2.3",
-    "@aofl/store": "^1.2.1",
-    "@aofl/web-components": "^1.2.1",
+    "@aofl/polyfill-service": "^1.3.0",
+    "@aofl/router": "^1.3.0",
+    "@aofl/server-environment": "^1.3.0",
+    "@aofl/store": "^1.3.0",
+    "@aofl/web-components": "^1.3.0",
     "@babel/polyfill": "^7.0.0",
     "@babel/runtime": "^7.1.5",
     "@polymer/lit-element": "^0.6.3",
     "isomorphic-fetch": "^2.2.1",
-    "lit-html": "^0.13.0"
+    "lit-html": "0.14.0"
   }
 }

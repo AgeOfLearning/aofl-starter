@@ -19,7 +19,8 @@ describe('home-page', () => {
     this.element = fixture('HomeTestFixture');
   });
 
-  it('shoud have shadowRoot', function() {
+  it('shoud have shadowRoot', async function() {
+    await this.element.updateComplete;
     expect(this.element.shadowRoot).to.not.be.null;
   });
 });

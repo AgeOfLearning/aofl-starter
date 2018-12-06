@@ -14,8 +14,8 @@ module.exports = (mode) => {
   const config = {
     entry: {
       'custom-elements-es5-adapter':
-        './node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js',
-      'main': './modules/index.js'
+        path.resolve(__dirname, '..', 'node_modules', '@webcomponents', 'webcomponentsjs', 'custom-elements-es5-adapter.js'),
+      'main': path.resolve(__dirname, '..', 'modules', 'index.js')
     },
     output: {
       path: path.join(outputDirRoot, outputDirName),
@@ -99,7 +99,7 @@ module.exports = (mode) => {
             loader: 'babel-loader',
             options: {
               'cacheDirectory': true,
-              ...require('./.babelrc.json')
+              ...require(path.join(__dirname, '.babelrc.json'))
             }
           }
         },
@@ -203,12 +203,6 @@ module.exports = (mode) => {
         to: 'favicon.ico'
       }])
     ],
-    resolve: {
-      modules: [
-        path.resolve('./'),
-        './node_modules/'
-      ]
-    },
     watchOptions: {
       ignored: [/node_modules\//]
     },

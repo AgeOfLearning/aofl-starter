@@ -32,7 +32,7 @@ describe('link-to', function() {
 
   it('Should render', function() {
     expect(this.element.shadowRoot).to.not.equal(null);
-    expect(this.element.href).to.equal('/login');
+    expect(this.element.href).to.equal(__webpack_public_path__ + 'login'); // eslint-disable-line
   });
 
   it('Should call router navigate when clicked', async function() {

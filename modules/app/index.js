@@ -4,6 +4,7 @@ import {environmentTypeEnumerate, getServerEnvironment} from '@aofl/server-envir
 
 const serverEnvironment = getServerEnvironment(/localhost/, /stage-/);
 
+/* istanbul ignore next */
 if (serverEnvironment !== environmentTypeEnumerate.DEV &&
 typeof aofljsConfig.__prerender__ === 'undefined') {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {

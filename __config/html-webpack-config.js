@@ -13,16 +13,20 @@ module.exports = (environment = 'production') => {
     alwaysWriteToDisk: true,
     templateParameters(compilation, assets, options) {
       let assetsMap = {};
-      for (let key in assets.chunks) {
-        if (!assets.chunks.hasOwnProperty(key)) continue;
-        let url = assets.chunks[key].entry;
-        let source = compilation.assets[url.substr(assets.publicPath.length).replace(/\?.*/, '')].source();
-        let sourceStr = jsStringEscape(source);
-        assetsMap[key] = {
-          url,
-          source,
-          sourceStr
-        };
+
+      for (const key in compilation.chunks) {
+        if (!compilation.chunks.hasOwnProperty(key)) continue;
+        const chunk = compilation.chunks[key];
+        if (typeof chunk.name === 'string' && chunk.name.length > 0) {
+          const url = assets.publicPath + chunk.files[0];
+          const source = compilation.assets[chunk.files[0].replace(/\?.*/, '')].source();
+          let sourceStr = jsStringEscape(source);
+          assetsMap[chunk.name] = {
+            url,
+            source,
+            sourceStr
+          };
+        }
       }
 
       return {
