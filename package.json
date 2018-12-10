@@ -76,7 +76,7 @@
     "@aofl/web-components": "^1.3.0",
     "@babel/polyfill": "^7.0.0",
     "@babel/runtime": "^7.1.5",
-    "@polymer/lit-element": "^0.6.3",
+    "@polymer/lit-element": "0.6.4",
     "isomorphic-fetch": "^2.2.1",
     "lit-html": "0.14.0"
   }
