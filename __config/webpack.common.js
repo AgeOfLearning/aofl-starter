@@ -5,6 +5,7 @@ const AofLTemplatingPlugin = require('@aofl/templating-plugin/index');
 const htmlWebpackConfig = require('./html-webpack-config');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPurifycssPlugin = require('@aofl/html-webpack-purify-internal-css-plugin');
 
 module.exports = (mode) => {
   const outputDirName = '__build';
@@ -26,25 +27,6 @@ module.exports = (mode) => {
     module: {
       rules: [
         {
-          test: /\.html$/,
-          exclude: /template\.html/,
-          use: [
-            {
-              loader: 'html-loader',
-              options: {
-                minimize: true,
-                attrs: [
-                  'aofl-img:aofl-src',
-                  'aofl-source:srcset',
-                  'aofl-img:src',
-                  'source:srcset',
-                  ':src'
-                ]
-              }
-            }
-          ]
-        },
-        {
           test: /\.css$/,
           use: [
             {
@@ -58,12 +40,7 @@ module.exports = (mode) => {
               options: {
                 sourceMap: false
               }
-            }
-          ]
-        },
-        {
-          test: /\.css$/,
-          use: [
+            },
             {
               loader: '@aofl/webcomponent-css-loader',
               options: {
@@ -76,10 +53,6 @@ module.exports = (mode) => {
         {
           test: /@webcomponents/,
           loader: 'imports-loader?this=>window'
-        },
-        {
-          test: /i18n\/index\.js$/,
-          use: '@aofl/i18n-loader'
         },
         {
           enforce: 'pre',
@@ -104,7 +77,11 @@ module.exports = (mode) => {
           }
         },
         {
-          test: /\.(png|jpe?g|gif)$/,
+          test: /i18n\/index\.js$/,
+          use: '@aofl/i18n-loader'
+        },
+        {
+          test: /\.(png|jpe?g|gif|svg)$/,
           use: [
             {
               loader: 'file-loader',
@@ -116,13 +93,12 @@ module.exports = (mode) => {
             {
               loader: 'img-loader',
               options: {
-                pngquant: {
-                  speed: 1
-                },
-                mozjpeg: {
-                  progressive: true,
-                  quality: 80
-                }
+                plugins: process.env.NODE_ENV === 'production' && [
+                  require('imagemin-gifsicle')(),
+                  require('imagemin-mozjpeg')(),
+                  require('imagemin-optipng')(),
+                  require('imagemin-svgo')()
+                ]
               }
             }
           ]
@@ -158,6 +134,9 @@ module.exports = (mode) => {
           ],
           ignore: ['**/__build/**/*', '**/node_modules/**/*']
         }
+      }),
+      new HtmlWebpackPurifycssPlugin({
+        level: mode === 'development'? 'none': 'auto'
       }),
       new WebpackPwaManifest({
         'name': 'Aofl Starter App',
@@ -195,7 +174,7 @@ module.exports = (mode) => {
           {
             src: 'assets/manifest/icon-512x512.png',
             sizes: '512x512'
-        }
+          }
         ]
       }),
       new CopyWebpackPlugin([{

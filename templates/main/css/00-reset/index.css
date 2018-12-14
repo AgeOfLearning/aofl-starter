@@ -1,4 +1,4 @@
-@import url('./normalize.css');
+@import url("./normalize.css");
 
 *,
 *::after,
@@ -8,15 +8,29 @@
 
 @media screen and (orientation: landscape) {
   /* This fixes a iOS webkit redraw with slotted elements*/
-  @keyframes iosWebkitLandscape {from { zoom: 99.99999%; } to { zoom: 100%; }}
+  @keyframes iosWebkitLandscape {
+    from {
+      zoom: 99.99999%;
+    }
+    to {
+      zoom: 100%;
+    }
+  }
   html {
     animation: iosWebkitLandscape linear 1ms;
   }
 }
 
 @media screen and (orientation: portrait) {
-    /* This fixes a iOS webkit redraw with slotted elements*/
-  @keyframes iosWebkitPortrait {from { zoom: 100.00001%; } to { zoom: 100%; }}
+  /* This fixes a iOS webkit redraw with slotted elements*/
+  @keyframes iosWebkitPortrait {
+    from {
+      zoom: 100.00001%;
+    }
+    to {
+      zoom: 100%;
+    }
+  }
   html {
     animation: iosWebkitPortrait linear 1ms;
   }

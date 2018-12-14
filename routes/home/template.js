@@ -1,9 +1,11 @@
+import logo from '../../assets/aofl-logo.png';
+
 export const template = (context, html) => html`
-  <a class="logo" href="https://ageoflearning.github.io/aofl" target="_blank" rel="noopener noreferrer">
-    <img width="200" src="https://ageoflearning.github.io/aofl/_assets/manifest/icon-512x512.png" alt="AofL JS Logo">
+  <a class="logo" href="/">
+    <img width="200" src="${logo}" alt="AofL JS Logo">
   </a>
 
-  <div>
+  <div id="badges-container">
     <a href="https://github.com/AgeOfLearning/aofl" target="_blank" rel="noopener noreferrer">
       <img src="https://img.shields.io/github/tag/AgeOfLearning/aofl.svg">
     </a>
@@ -23,8 +25,8 @@ export const template = (context, html) => html`
 
   <h1>Welcome to AofL JS</h1>
 
-  <p>This mono-repo contains tools and libraries for the AofL JS framework. For documentation visit the <a href="https://ageoflearning.github.io/aofl/" target="_blank" rel="noopener noreferrer no-wrap">AofL JS documentation website</a>.
-  </p>
+  <p>Let's get started</p>
+  <a id="learn-aofl" href="https://ageoflearning.github.io/aofl/" target="_blank" rel="noopener noreferrer no-wrap">Learn AofL JS</a>.
 
   <h2>Supported Browsers</h2>
 

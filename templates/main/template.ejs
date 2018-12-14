@@ -12,13 +12,15 @@
   <body>
     <route-view></route-view>
 
+    <script><%= assetsMap['runtime'].source %></script>
     <script>
-      <%= assetsMap['runtime'].source %>
-      if (window.customElements) {
-        eval('<%= assetsMap["custom-elements-es5-adapter"].sourceStr %>');
-      }
-      <%= assetsMap['common'] && assetsMap['common'].source %>
-      <%= assetsMap['main'].source %>
+      (function() {
+        if (window.customElements) {
+          eval('<%= assetsMap["custom-elements-es5-adapter"].sourceStr %>');
+        }
+      }());
     </script>
+    <script><%= assetsMap['common'] && assetsMap['common'].source %></script>
+    <script><%= assetsMap['main'].source %></script>
   </body>
 </html>

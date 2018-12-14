@@ -15,13 +15,14 @@ const config = merge(common('development'), {
     rules: [
       {
         test: /\.js$/,
+        exclude: /(node_modules_sourced|node_modules|\.spec\.|__build|__config)/,
+        enforce: 'post',
         use: {
           loader: 'istanbul-instrumenter-loader',
           options: {
             esModules: true
           }
-        },
-        exclude: /(node_modules_sourced|node_modules|\.spec\.|__build|__config)/
+        }
       }
     ]
   },

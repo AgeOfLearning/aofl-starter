@@ -1,10 +1,10 @@
 /*eslint-disable*/
 const merge = require('webpack-merge');
 const common = require('./webpack.common');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 const {InjectManifest} = require('workbox-webpack-plugin');
 const commonConfig = common('production');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const config = merge(commonConfig, {
   devtool: 'nosources-source-map',
@@ -18,23 +18,26 @@ const config = merge(commonConfig, {
     // useLocalIp: true
   },
   plugins: [
-    new UglifyJsPlugin({
-      sourceMap: true,
-      cache: true,
-      parallel: true,
-      extractComments: true,
-      uglifyOptions: {
-        compress: {
-          warnings: false
-        }
-      }
-    }),
     new InjectManifest({
-      swSrc: path.join(__dirname, '..', 'sw.js'),
+      swSrc: path.join(__dirname, 'sw.js'),
       swDest: 'sw.js',
       exclude: [/\.LICENSE$/, /\.map\.js$/]
     })
-  ]
+  ],
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        sourceMap: true,
+        terserOptions: {
+          output: {
+            comments: /\#/i
+          }
+        },
+        extractComments: true
+      })
+    ]
+  }
 });
 
 module.exports = config;

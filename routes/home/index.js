@@ -35,7 +35,7 @@ class HomePage extends AoflElement {
   render() {
     return super.render(template, [styles]);
   }
-};
+}
 
 customElements.define(HomePage.is, HomePage);
 
