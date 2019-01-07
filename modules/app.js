@@ -1,5 +1,5 @@
-import '../init-router-service';
-import '../route-view-element';
+import './init-router-service';
+import './route-view-element';
 import {environmentTypeEnumerate, getServerEnvironment} from '@aofl/server-environment';
 
 const serverEnvironment = getServerEnvironment(/localhost/, /stage-/);

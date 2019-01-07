@@ -4,6 +4,8 @@ import AoflElement from '@aofl/web-components/aofl-element';
 import {routerInstance} from '@aofl/router';
 
 const LEADING_SLASH_REGEX = /^\//;
+const PUBLIC_PATH_REGEX = new RegExp('^' + __webpack_public_path__); // eslint-disable-line
+
 /**
  *
  * @class LinkToElement
@@ -16,11 +18,8 @@ class LinkToElement extends AoflElement {
    */
   constructor() {
     super();
-    this.publicPath = __webpack_public_path__; // eslint-disable-line
-    this.publicPathRegex = new RegExp('^' + this.publicPath);
     this.href = '';
   }
-
   /**
    *
    * @readonly
@@ -28,7 +27,6 @@ class LinkToElement extends AoflElement {
   static get is() {
     return 'link-to';
   }
-
   /**
    * @return {Object}
    */
@@ -38,7 +36,6 @@ class LinkToElement extends AoflElement {
       reflect: true
     };
   }
-
   /**
    * @param {Event} e
    * @return {void}
@@ -47,8 +44,6 @@ class LinkToElement extends AoflElement {
     e.preventDefault();
     routerInstance.navigate(this.href);
   }
-
-
   /**
    *
    * @param {String} name
@@ -58,11 +53,10 @@ class LinkToElement extends AoflElement {
   attributeChangedCallback(name, oldValue, newValue) {
     super.attributeChangedCallback(name, oldValue, newValue);
     if (name === 'href') {
-      const href = this.href.replace(this.publicPathRegex, '').replace(LEADING_SLASH_REGEX, '');
-      this.href = this.publicPath + href;
+      const href = this.href.replace(PUBLIC_PATH_REGEX, '').replace(LEADING_SLASH_REGEX, '');
+      this.href = __webpack_public_path__ + href; // eslint-disable-line
     }
   }
-
   /**
    *
    * @return {Object}

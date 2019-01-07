@@ -11,3 +11,11 @@ body {
   letter-spacing: 0.01em;
   line-height: 1.6;
 }
+
+route-view {
+  display: none;
+}
+
+route-view.loaded {
+  display: block;
+}
