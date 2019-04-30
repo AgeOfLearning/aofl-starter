@@ -4,13 +4,14 @@
  * @prerender false
  */
 import {template} from './template';
-import AoflElement from '@aofl/web-components/aofl-element';
+import {AoflElement, customElement} from '@aofl/web-components/aofl-element';
 import styles from './template.css';
 
 /**
  *
  * @extends {AoflElement}
  */
+@customElement('home-page')
 class HomePage extends AoflElement {
   /**
    *
@@ -24,9 +25,7 @@ class HomePage extends AoflElement {
    *
    * @readonly
    */
-  static get is() {
-    return 'home-page';
-  }
+  static is = 'home-page';
 
   /**
    *
@@ -36,7 +35,5 @@ class HomePage extends AoflElement {
     return super.render(template, [styles]);
   }
 }
-
-customElements.define(HomePage.is, HomePage);
 
 export default HomePage;

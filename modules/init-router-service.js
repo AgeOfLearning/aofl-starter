@@ -1,5 +1,5 @@
 import {routerInstance} from '@aofl/router';
-import routesConfig from '@aofl/templating-plugin/routes.config';
+import routesConfig from './__config/routes';
 
 const routes = routesConfig.routes;
 

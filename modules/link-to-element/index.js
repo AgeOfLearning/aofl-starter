@@ -1,6 +1,6 @@
 import {template} from './template';
 import styles from './template.css';
-import AoflElement from '@aofl/web-components/aofl-element';
+import {AoflElement, property, customElement} from '@aofl/web-components/aofl-element';
 import {routerInstance} from '@aofl/router';
 
 const LEADING_SLASH_REGEX = /^\//;
@@ -11,6 +11,7 @@ const PUBLIC_PATH_REGEX = new RegExp('^' + __webpack_public_path__); // eslint-d
  * @class LinkToElement
  * @extends {AoflElement}
  */
+@customElement('link-to')
 class LinkToElement extends AoflElement {
   /**
    *
@@ -24,18 +25,13 @@ class LinkToElement extends AoflElement {
    *
    * @readonly
    */
-  static get is() {
-    return 'link-to';
-  }
+  static is = 'link-to';
   /**
    * @return {Object}
    */
-  static get properties() {
-    return {
-      href: String,
-      reflect: true
-    };
-  }
+  @property({type: String})
+  href = '';
+
   /**
    * @param {Event} e
    * @return {void}
@@ -71,7 +67,5 @@ class LinkToElement extends AoflElement {
     return super.render(template, [styles]);
   }
 }
-
-customElements.define(LinkToElement.is, LinkToElement);
 
 export default LinkToElement;

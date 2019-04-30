@@ -1,14 +1,14 @@
 import {template} from './template';
 import styles from './template.css';
-import AoflElement from '@aofl/web-components/aofl-element';
+import {AoflElement, html, customElement} from '@aofl/web-components/aofl-element';
 import {routerInstance} from '@aofl/router';
-import {html} from '@polymer/lit-element';
 
 /**
  *
  * @class RouteViewElement
  * @extends {AoflElement}
  */
+@customElement('route-view')
 class RouteViewElement extends AoflElement {
   /**
    *
@@ -19,16 +19,14 @@ class RouteViewElement extends AoflElement {
     this.template = template;
     routerInstance.after((request, response, next) => {
       response.matchedRoute.resolve()
-      .then((component) => {
-        document.title = response.matchedRoute.title;
-        let t = `<${component.default.is}></${component.default.is}>`;
-        this.template = () => html([t]);
-        this.requestUpdate();
-        next(request, response, next);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+        .then((component) => {
+          document.title = response.matchedRoute.title;
+          const t = `<${component.default.is}></${component.default.is}>`;
+          this.template = () => html([t]);
+          this.requestUpdate();
+          next(request, response, next);
+        })
+        .catch((e) => {});
     });
   }
 
@@ -37,9 +35,7 @@ class RouteViewElement extends AoflElement {
    *
    * @readonly
    */
-  static get is() {
-    return 'route-view';
-  }
+  static is = 'route-view';
 
   /**
    *
@@ -66,7 +62,5 @@ class RouteViewElement extends AoflElement {
     return super.render(this.template, [styles]);
   }
 }
-
-customElements.define(RouteViewElement.is, RouteViewElement);
 
 export default RouteViewElement;

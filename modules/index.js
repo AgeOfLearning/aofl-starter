@@ -4,6 +4,6 @@ import polyfills from './__config/polyfills';
 window.aofljsConfig = window.aofljsConfig || {};
 
 Polyfill.loadAll(polyfills)
-.then(() => {
+  .then(() => {
   import(/* webpackMode: "eager" */'./app');
-});
+  });

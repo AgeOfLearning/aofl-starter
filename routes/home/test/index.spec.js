@@ -1,6 +1,6 @@
 /* eslint no-invalid-this: "off" */
 import '../index.js';
-import {html, render} from 'lit-html';
+import {html, render} from '@aofl/web-components/aofl-element';
 
 describe('home-page', () => {
   before(function() {

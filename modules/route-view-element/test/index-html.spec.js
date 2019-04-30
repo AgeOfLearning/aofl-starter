@@ -1,5 +1,5 @@
 /* eslint no-invalid-this: "off" */
-import {html, render} from 'lit-html';
+import {html, render} from '@aofl/web-components/aofl-element';
 import {routerInstance} from '@aofl/router';
 import '..';
 
