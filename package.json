@@ -26,15 +26,14 @@
     "jsdoc": "3.5.5"
   },
   "dependencies": {
-    "@aofl/cli": "2.0.0",
+    "@aofl/cli": "2.0.7",
     "@aofl/polyfill-service": "2.0.0",
     "@aofl/router": "2.0.0",
     "@aofl/server-environment": "2.0.0",
-    "@aofl/store": "2.0.0",
-    "@aofl/web-components": "2.0.0",
+    "@aofl/web-components": "2.0.1",
     "@babel/polyfill": "7.4.0",
     "@babel/runtime": "7.4.2",
-    "@webcomponents/webcomponentsjs": "^2.2.1",
+    "@webcomponents/webcomponentsjs": "^2.2.10",
     "ajv": "^6.10.0",
     "isomorphic-fetch": "2.2.1",
     "lit-element": "2.1.0",
