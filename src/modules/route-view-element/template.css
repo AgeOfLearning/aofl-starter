@@ -1,0 +1,12 @@
+/*! *@aofl-component */
+@import url("../../template/main/css/index.css");
+
+:host {
+  display: block;
+}
+
+::slotted(*) {
+  display: block !important;
+}
+
+      

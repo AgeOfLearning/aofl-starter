@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="aoflTemplate:locale">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <template>aoflTemplate:metaTags</template>
+    <title>aoflTemplate:title</title>
+    <style>${require("./main/css/index.css")}</style>
+  </head>
+  <body>
+    <route-view></route-view>
+
+    <%if (typeof assetsMap['runtime'] !== 'undefined') { %>
+      <script><%= assetsMap['runtime'].source %></script>
+    <% } %>
+
+    <script>
+      (function() {
+        if (window.customElements) {
+          eval('<%= assetsMap["custom-elements-es5-adapter"].sourceStr %>');
+        }
+      }());
+    </script>
+
+    <%if (typeof assetsMap['common'] !== 'undefined') { %>
+      <script src="<%= assetsMap['common'].url %>"></script>
+    <% } %>
+
+    <script src="<%= assetsMap['main'].url %>"></script>
+  </body>
+</html>

@@ -1,6 +1,5 @@
 {
   "verbose": true,
-  "persistent": false,
   "plugins": {
     "local": {
       "browsers": [
@@ -18,18 +17,7 @@
         "text-summary",
         "lcov"
       ],
-      "include": "**/*.js",
-      "exclude": [
-        "**/node_modules",
-        "**/node_modules_sourced",
-        "**/documentation{,!(/tests/**)}",
-        "**/__config",
-        "**/cli",
-        "**/*-instance/**",
-        "**/*-loader/**",
-        "**/*-polyfill/**",
-        "**/*-plugin/**"
-      ]
+      "include": "**/*.js"
     }
   }
 }

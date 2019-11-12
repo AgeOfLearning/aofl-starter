@@ -2,6 +2,12 @@
 
 This project is built using AofL JS. For documentation visit the <a href="https://ageoflearning.github.io/aofl/" target="_blank" rel="noopener noreferrer">AofL JS documentation website</a>.
 
+## Getting Started
+```bash
+$ npm ci
+$ npm run start:dev
+```
+
 ## Useful commands
 ```bash
 $ npm run # list available commands
