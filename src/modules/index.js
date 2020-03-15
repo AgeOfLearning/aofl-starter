@@ -13,5 +13,5 @@ if (process.env.NODE_ENV === environmentTypeEnumerate.DEV && typeof window.aoflD
 
 Polyfill.loadAll(polyfills)
   .then(() => {
-  import(/* webpackMode: "eager" */'./app');
+    import(/* webpackMode: "eager" */'./app');
   });
