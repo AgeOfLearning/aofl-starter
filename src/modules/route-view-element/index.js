@@ -22,7 +22,7 @@ class RouteViewElement extends AoflElement {
           const t = `<${component.default.is}></${component.default.is}>`;
           this.template = () => html([t]);
           this.requestUpdate();
-          next(request, response, next);
+          next(response);
         })
         .catch((e) => {});
     });
