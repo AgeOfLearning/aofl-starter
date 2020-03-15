@@ -2,6 +2,8 @@
 import {html, render} from 'lit-html';
 import {routerInstance} from '@aofl/router';
 import '../';
+import {spy, stub} from 'sinon';
+import {expect} from 'chai';
 
 describe('route-view ERROR', function() {
   beforeEach(function() {
@@ -14,10 +16,10 @@ describe('route-view ERROR', function() {
         }
       }
     };
-    sinon.stub(routerInstance, 'after').callsFake((fn) => {
-      this.mws.push(sinon.spy(fn));
+    stub(routerInstance, 'after').callsFake((fn) => {
+      this.mws.push(spy(fn));
     });
-    sinon.stub(routerInstance, 'navigate').callsFake(() => {
+    stub(routerInstance, 'navigate').callsFake(() => {
       this.mws.forEach((mw) => mw(response, response, ()=>{}));
     });
 
@@ -25,7 +27,7 @@ describe('route-view ERROR', function() {
       <route-view id="RouterViewErrorTestFixture"></route-view>
     `, this.testContainer);
     this.viewElement = this.testContainer.querySelector('#RouterViewErrorTestFixture');
-    sinon.spy(this.viewElement, 'render');
+    spy(this.viewElement, 'render');
   });
 
   afterEach(function() {

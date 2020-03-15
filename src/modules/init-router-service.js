@@ -7,7 +7,6 @@ routerInstance.init(routes);
 
 routerInstance
   .navigate(location.href.replace(location.origin, '').replace('index.html', ''), {
-    forceReload: true,
     replaceState: true
   })
   .catch((e) => {});

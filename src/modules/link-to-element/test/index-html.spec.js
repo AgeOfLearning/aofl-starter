@@ -3,6 +3,8 @@ import {html, render} from 'lit-html';
 import {routerInstance} from '@aofl/router';
 import {environment} from '../../constants-enumerate';
 import '../';
+import {expect} from 'chai';
+import {spy} from 'sinon';
 
 describe('link-to', function() {
   before(function() {
@@ -57,11 +59,11 @@ describe('link-to', function() {
 
     await Promise.all(promises);
 
-    sinon.spy(this.routerInstance, 'navigate');
-    sinon.spy(this.routerInstance, 'after');
-    sinon.spy(this.element, 'checkActive');
-    sinon.spy(this.elementTrack, 'checkActive');
-    sinon.spy(this.elementTrack, 'routerUnsubscribe');
+    spy(this.routerInstance, 'navigate');
+    spy(this.routerInstance, 'after');
+    spy(this.element, 'checkActive');
+    spy(this.elementTrack, 'checkActive');
+    spy(this.elementTrack, 'routerUnsubscribe');
   });
 
   afterEach(function() {

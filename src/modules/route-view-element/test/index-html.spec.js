@@ -2,6 +2,8 @@
 import {html, render} from 'lit-html';
 import {routerInstance} from '@aofl/router';
 import '..';
+import {expect} from 'chai';
+import {spy, stub} from 'sinon';
 
 const pageElem = 'div';
 describe('route-view', function() {
@@ -20,10 +22,10 @@ describe('route-view', function() {
       }
     };
 
-    sinon.stub(routerInstance, 'after').callsFake((fn) => {
-      this.mws.push(sinon.spy(fn));
+    stub(routerInstance, 'after').callsFake((fn) => {
+      this.mws.push(spy(fn));
     });
-    sinon.stub(routerInstance, 'navigate').callsFake(() => {
+    stub(routerInstance, 'navigate').callsFake(() => {
       this.mws.forEach((mw) => mw(response, response, ()=>{}));
     });
 

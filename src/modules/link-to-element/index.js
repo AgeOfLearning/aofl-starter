@@ -1,11 +1,12 @@
 import {AoflElement, property, customElement} from '@aofl/element';
 import {routerInstance, PathUtils} from '@aofl/router';
+import {environment} from '../constants-enumerate';
 
 /**
  * @private
  * @type {RegExp}
  */
-const PUBLIC_PATH_REGEX = new RegExp('^' + __webpack_public_path__, 'i'); // eslint-disable-line
+const PUBLIC_PATH_REGEX = new RegExp('^' + environment.PUBLIC_PATH, 'i');
 
 /**
  * @extends {AoflElement}
@@ -22,7 +23,7 @@ class LinkToElement extends AoflElement {
    */
   @property({converter(value) {
     const href = PathUtils.removeLeadingSlash(value.replace(PUBLIC_PATH_REGEX, ''));
-    return '/' + PathUtils.removeLeadingSlash(__webpack_public_path__ + href, ''); // eslint-disable-line
+    return '/' + PathUtils.removeLeadingSlash(environment.PUBLIC_PATH + href, '');
   }})
   href = '';
   /**

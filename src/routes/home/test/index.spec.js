@@ -1,6 +1,7 @@
 /* eslint babel/no-invalid-this: "off" */
 import '../index.js';
 import {html, render} from 'lit-html';
+import {expect} from 'chai';
 
 describe('home-page', () => {
   beforeEach(function() {

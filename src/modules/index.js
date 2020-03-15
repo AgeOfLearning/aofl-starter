@@ -7,6 +7,7 @@ import {environmentTypeEnumerate} from '@aofl/server-environment';
 
 window.aofljsConfig = window.aofljsConfig || {};
 
+/* istanbul ignore next */
 if (process.env.NODE_ENV === environmentTypeEnumerate.DEV && typeof window.aoflDevtools === 'undefined') {
   window.aoflDevtools = {};
 }

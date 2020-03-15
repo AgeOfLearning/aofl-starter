@@ -8,8 +8,7 @@ const STAGE = serverEnvironment === environmentTypeEnumerate.STAGE;
 const PROD = !DEV && ! STAGE;
 
 const environment = {
-  PUBLIC_PATH: __webpack_public_path__, // eslint-disable-line
-  DEV,
+  PUBLIC_PATH: __webpack_public_path__ === ''? '/': __webpack_public_path__, // eslint-disable-line
   STAGE,
   PROD
 };

@@ -13,13 +13,13 @@ import styles from './template.css';
 @customElement('home-page')
 class HomePage extends AoflElement {
   /**
-   *
    * @type {String}
+   * @static
    * @readonly
    */
   static is = 'home-page';
   /**
-   *
+   * @protected
    * @return {Object}
    */
   render() {
